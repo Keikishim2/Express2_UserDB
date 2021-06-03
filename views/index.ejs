@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/style.css">
+</head>
+<body>
+    <fieldset>
+        <h1>Welcome to the User Dashboard!</h1>
+        <form action='/messages' method="POST">
+            Name: <input type="text" name="name">
+            Message: <input type="type" name="message">
+            <input type="submit" name="button" value="Post Message">
+        </form>
+        <div id="exisitng_messages">
+            <h1> Oh! You got messages, Amazeballs! </h1>
+            <% if (messages.length > 0 ) { %>
+                <% for (const message of messages) {%>
+                    <h3>Name: <%= message.name %></h3>
+                    <h3>Message: <%= message.message %></h3>
+                    <% for (const comment of message._comments) {%>
+                        <h5>Name: <%= comment.name %></h5>
+                        <h5>Comment: <%= comment.comment %></h5>
+                    <% } %>
+                    <form action='/comments/<%= message._id %>' method ="POST">
+                    Name: <input type="text" name="name">
+                    Comment: <input type="type" name="comment">
+                    <input type="submit" name="button" value="Post Comment">
+                    </form>
+                    <% } %>
+                <% } %>
+        </div>
+    </fieldset>
+</body>
+</html>
